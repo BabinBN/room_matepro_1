@@ -74,19 +74,31 @@
       },
       "routes": [
         {
-          "name": "RouteView",
-          "pattern": ":?query:",
-          "target": [
-            "TargetView"
+          "name":"login",
+          "pattern": "",
+          "target":[
+            "Login"
           ]
         }
       ],
-      "targets": {
-        "TargetView": {
-          "id": "View",
-          "name": "View"
-        }
+      "targets": { 
+        "Login": {
+        "viewName": "sign_in",
+        "viewId": "Login",
+        "viewLevel": 1
+      },
+      
+      "Dashboard": {
+        "viewName": "dashboard",
+        "viewId": "Dashboard",
+        "viewLevel": 2
+      },
+      "DashboardTiles": {
+        "viewName": "dashboardtiles",
+        "viewId": "DashboardTiles",
+        "viewLevel": 3
       }
+    }
     },
     "rootView": {
       "viewName": "roommatepro.view.App",
