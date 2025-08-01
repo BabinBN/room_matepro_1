@@ -1,4 +1,4 @@
-PROCEDURE "ADD_EDIT_USER"(IN IN_PARAM NCLOB, OUT EX_MESSAGE NVARCHAR(200))
+ create PROCEDURE "ADD_EDIT_USER"(IN IN_PARAM NCLOB, OUT EX_MESSAGE NVARCHAR(200))
 AS
 BEGIN
     DECLARE it_user_id BIGINT;
@@ -83,23 +83,12 @@ BEGIN
                     CURRENT_TIMESTAMP
                 );
 
-                SELECT CURRENT_IDENTITY_VALUE() INTO it_user_id FROM "userdt";
+                it_user_id := CURRENT_IDENTITY_VALUE();
             END IF;
         END IF;
     END FOR;
 
     -- Final output if needed
-    SELECT
-        0 AS "status",
-        "user_id",
-        "full_name",
-        "email",
-        "phone_number",
-        "role_user",
-        "created_at",
-        "updated_at"
-    FROM "userdt"
-    WHERE "user_id" = :it_user_id;
 
     EX_MESSAGE := 'Success';
 END;
