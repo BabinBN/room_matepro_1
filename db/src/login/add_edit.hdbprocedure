@@ -1,4 +1,4 @@
- create PROCEDURE "ADD_EDIT_USER"(IN IN_PARAM NCLOB, OUT EX_MESSAGE NVARCHAR(200))
+PROCEDURE "ADD_EDIT_USER"(IN IN_PARAM NCLOB, OUT EX_MESSAGE NVARCHAR(200))
 AS
 BEGIN
     DECLARE it_user_id BIGINT;
@@ -89,6 +89,17 @@ BEGIN
     END FOR;
 
     -- Final output if needed
+    SELECT
+        0 AS "status",
+        "user_id",
+        "full_name",
+        "email",
+        "phone_number",
+        "role_user",
+        "created_at",
+        "updated_at"
+    FROM "userdt"
+    WHERE "user_id" = :it_user_id;
 
     EX_MESSAGE := 'Success';
 END;
