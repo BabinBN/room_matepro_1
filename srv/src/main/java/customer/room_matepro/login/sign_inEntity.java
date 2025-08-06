@@ -1,39 +1,36 @@
 package customer.room_matepro.login;
 
 
-import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Id;
-import jakarta.persistence.SqlResultSetMapping;
-import jakarta.persistence.ColumnResult;
-import jakarta.persistence.ConstructorResult;
-import jakarta.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@SuppressWarnings("serial")
+import jakarta.persistence.*;
+import lombok.*;
+@Data
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Component
+
+
 public class sign_inEntity {
-    @Column(name = "user_id")
-    private Long userId;
-    @Column(name = "full_name")
-    private String fullname;
-    @Column(name="email")
+
+    @Id
+    private Long user_id;
+    private String full_name;
     private String email;
-    @Column(name="phone_number")
-    private String phonenumber;
-    @Column(name="password_pwd")
-    private String passwordPwd;
-    @Column(name="role_user")
-    private String roleUser;
+    private String phone_number;
+    private String password_pwd;
+    private String role_user;
+     private String created_at;
+    private String updated_at;
+
+    // // Constructor required for @ConstructorResult
+    public sign_inEntity(Long userId, String fullname, String email, String phonenumber, String passwordPwd, String roleUser,String createdAt, String updatedAt) {
+        this.user_id = userId;
+        this.full_name = fullname;
+        this.email = email;
+        this.phone_number = phonenumber;
+        this.password_pwd = passwordPwd;
+        this.role_user = roleUser;
+        this.created_at = createdAt; 
+        this.updated_at = updatedAt; 
+    }
 }

@@ -1,7 +1,7 @@
 package customer.room_matepro.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +16,8 @@ public class sign_inController {
     private sign_inService signInService;
       
     @PostMapping
-    public String postMethodName(@RequestBody sign_in signIn) {
-        return signInService.AddSignIn(signIn) != null ? "Success" : "Failure";
+    public sign_in postMethodName(@RequestBody sign_inEntity signIn) {
+        return signInService.AddSignIn(signIn);
     }
     
 }

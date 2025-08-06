@@ -20,18 +20,26 @@ public class sign_inDAO {
 
     private EntityManager entityManager;
     
-    public sign_in CreateSignIn(sign_in SignIn) {
+    public sign_in CreateSignIn(sign_inEntity SignIn) {
         try {
-            String reqPayload = new Gson().toJson(new sign_in[] { SignIn });
+            String reqPayload = new Gson().toJson(new sign_inEntity[] { SignIn });
             StoredProcedureQuery query = entityManager
             .createStoredProcedureQuery("ADD_EDIT_USER","sign_inMapping");
+            query.registerStoredProcedureParameter("IN_PARAM", String.class, ParameterMode.IN);
             query.registerStoredProcedureParameter("EX_MESSAGE", String.class, ParameterMode.OUT);
             query.setParameter("IN_PARAM", reqPayload);
             query.execute();
-            @SuppressWarnings("unchecked")
-            List<sign_in> resultList = query.getResultList();
-            return resultList.isEmpty() ? null : resultList.get(0);
+        //        boolean hasResultSet = query.execute();
+         //String exMessage = (String) query.getOutputParameterValue("EX_MESSAGE");
+        // if (hasResultSet) {
+        //     @SuppressWarnings("unchecked")
+        //     List<sign_in> resultList = query.getResultList();
+        //     return resultList.isEmpty() ? null : resultList.get(0);
+        // }
+           // @SuppressWarnings("unchecked")
+        sign_in resultList =(sign_in) query.getSingleResult();
 
+        return resultList;
         } catch (Exception e) {
             return null;
         }

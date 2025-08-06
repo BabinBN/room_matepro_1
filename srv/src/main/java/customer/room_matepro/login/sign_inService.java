@@ -8,7 +8,7 @@ public class sign_inService {
     @Autowired 
      private sign_inDAO signInDAO;
     
-    public sign_in AddSignIn(sign_in signIn) {
+    public sign_in AddSignIn(sign_inEntity signIn) {
         return signInDAO.CreateSignIn(signIn);
     }
 }
