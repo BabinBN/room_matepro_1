@@ -1,6 +1,5 @@
 package customer.room_matepro.login;
 
-import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

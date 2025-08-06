@@ -1,0 +1,27 @@
+PROCEDURE user_login(IN IN_PARAM NCLOB,OUT EX_MESSAGE NVARCHAR(200) )
+AS
+BEGIN
+    DECLARE email_ NVARCHAR(100);
+    DECLARE Password_ NVARCHAR(100);
+   
+    SELECT "email","password_pwd" INTO email_,Password_ FROM JSON_TABLE(:IN_PARAM,'$'
+       COLUMNS("email" NVARCHAR(50) PATH '$.email',
+       "password_pwd" NVARCHAR(20) PATH '$.password_pwd'
+       )
+    
+    );
+    IF EXISTS (SELECT*FROM "userdt" WHERE "email"=:email_ AND "password_pwd"=:Password_ )THEN
+        EX_MESSAGE='Login Success';
+        SELECT
+        "user_id",
+        "full_name",
+        "email",
+        "phone_number",
+        "role_user",
+        "created_at",
+        "updated_at"
+    FROM "userdt" Where "email"=email_ AND "password_pwd"=Password_;
+    ELSE
+        EX_MESSAGE='Invalid Credentials';
+    END IF;
+    END;
