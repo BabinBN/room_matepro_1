@@ -79,6 +79,20 @@
           "target":[
             "Login"
           ]
+        },
+        {
+          "name": "dashboard",
+          "pattern": "dashboard",
+          "target": [
+            "Dashboard"
+          ]
+        },
+        {
+          "name": "dashboardTiles",
+          "pattern": "dashboardtiles",
+          "target": [
+            "DashboardTiles"
+          ]
         }
       ],
       "targets": { 
