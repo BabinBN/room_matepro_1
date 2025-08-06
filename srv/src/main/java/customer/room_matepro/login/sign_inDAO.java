@@ -43,4 +43,24 @@ public class sign_inDAO {
             return null;
         }
     }
+
+    public sign_in Getemail_PWD(userlogin userlogin) {
+    {
+           try{    
+                  String reqPayload=new Gson().toJson(new userlogin []{userlogin});
+                 StoredProcedureQuery query = entityManager.createStoredProcedureQuery("user_login","sign_inMapping");
+                 query.registerStoredProcedureParameter("IN_PARAM", String.class, ParameterMode.IN);
+                 query.registerStoredProcedureParameter("EX_MESSAGE", String.class, ParameterMode.OUT);
+                 query.setParameter("IN_PARAM", reqPayload);
+                 query.execute();
+
+                 return (sign_in) query.getSingleResult();
+
+           }
+            catch (Exception e) {
+                return null;
+           }
+    }
+
+    }
 }

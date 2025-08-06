@@ -51,4 +51,5 @@ public class sign_in
         this.created_at = createdAt; 
         this.updated_at = updatedAt; 
     }
-} 
+}
+

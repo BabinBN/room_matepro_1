@@ -3,6 +3,7 @@ package customer.room_matepro.login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class sign_inService {
     @Autowired 
@@ -10,5 +11,9 @@ public class sign_inService {
     
     public sign_in AddSignIn(sign_inEntity signIn) {
         return signInDAO.CreateSignIn(signIn);
+    }
+
+    public sign_in GetUserByEmailAndPassword(userlogin userlogin) {
+        return signInDAO.Getemail_PWD(userlogin);
     }
 }
