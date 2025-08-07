@@ -65,7 +65,7 @@
             </tnt:SideNavigation>
        
               <HBox class="sapUiSmallMargin" justifyContent="Start" >
-              <mvc:XMLView viewName="roomatepro.roommatepro.view.dashboardtiles" />
+              <mvc:XMLView viewName="roommatepro.view.dashboardtiles" />
             </HBox>
         </HBox>
       </content>
