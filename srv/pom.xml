@@ -24,6 +24,11 @@
 			<artifactId>cds-starter-spring-boot</artifactId>
 		</dependency>
 		<!-- Spring Boot 3.x -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version>
+</dependency>
 
 
 		<!-- Plus a JDBC driver -->

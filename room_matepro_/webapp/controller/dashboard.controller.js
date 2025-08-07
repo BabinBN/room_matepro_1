@@ -5,7 +5,7 @@ sap.ui.define([
   ], function (Controller, MessageToast, JSONModel) {
     "use strict";
   
-    return Controller.extend("roomatepro.roommatepro.controller.dashboard", {
+    return Controller.extend("roommatepro.controller.dashboard", {
 	onCollapseExpandPress() {
 			const oSideNavigation = this.byId("sideNavigation"),
 				bExpanded = oSideNavigation.getExpanded();

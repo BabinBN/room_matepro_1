@@ -2,18 +2,18 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    controllerName="roomatepro.room_matepro_.controller.sign_in">
+    controllerName="roommatepro.controller.sign_in">
 
     <VBox
         justifyContent="Center"
         alignItems="Center"
-        class="sapUiContentPadding sapUiLargeMarginTop"
+        class="sapUiContentPadding sapUiLargeMarginTop" height="75%" 
         >
         
         <Panel class="shadow-lg sapUiLargeMarginTop">
             <VBox class="sapUiMediumMargin " id="load" width="300px">
                 <HBox justifyContent="Center" class="sapUiTinyMarginBottom">
-                   <Image src="images/log.png" width="100px" height="80px" />
+                   <Image src="images/logo.png" width="100px" height="80px" />
                 </HBox>
                 
                 <HBox justifyContent="Center" class="sapUiMediumMarginBottom">

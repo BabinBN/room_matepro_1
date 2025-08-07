@@ -5,7 +5,7 @@ sap.ui.define([
   ], function (Controller, MessageToast, JSONModel) {
     "use strict";
   
-    return Controller.extend("roomatepro.roommatepro.controller.sign_in", {
+    return Controller.extend("roommatepro.controller.sign_in", {
       onInit: function () {
         this.initializeValidationModel();
       },

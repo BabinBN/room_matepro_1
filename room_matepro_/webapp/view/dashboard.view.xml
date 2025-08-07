@@ -5,7 +5,7 @@
   xmlns:tnt="sap.tnt"
   xmlns:f="sap.f"
   height="100%"
-  controllerName="roomatepro.roommatepro.controller.dashboard">
+  controllerName="roommatepro.controller.dashboard">
 
   <App>
     <Page id="myPage" title="Room Mate Dashboard" enableScrolling="true">

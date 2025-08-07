@@ -4,6 +4,6 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel"
   ], function (Controller, MessageToast, JSONModel) {
     "use strict";
-    return Controller.extend("roomatepro.roommatepro.controller.dashboardtiles", {
+    return Controller.extend("roommatepro.controller.dashboardtiles", {
 
     })});

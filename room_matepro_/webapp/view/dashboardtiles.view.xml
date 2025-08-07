@@ -1,5 +1,5 @@
 <mvc:View
-  controllerName="roomatepro.roommatepro.controller.dashboardtiles"
+  controllerName="roommatepro.controller.dashboardtiles"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
   xmlns:tnt="sap.tnt"
