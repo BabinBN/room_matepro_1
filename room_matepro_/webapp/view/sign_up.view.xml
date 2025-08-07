@@ -1,0 +1,111 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    controllerName="roommatepro.controller.sign_up">
+
+<FlexBox
+  direction="Column"         
+  justifyContent="Center"   
+  alignItems="Center"       
+  height="auto"
+  class="sapUiContentPadding"
+  style="
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+    min-height: 200px;
+  "> 
+        
+       <Panel class="shadow-lg sapUiLargeMarginTop">
+
+            <VBox class="sapUiMediumMargin" width="260px" renderType="Bare">
+               <HBox justifyContent="Center" alignItems="Center" class="sapUiMediumMarginBottom">
+    <Image src="images/logo.png" width="30px" height="30px" />
+    <Title text="Create your account" level="H1" class="sapUiSmallMarginBegin" />
+</HBox>
+
+                <!-- Full Name -->
+            <Label text="{i18n>l_fullname}" labelFor="fullNameInput"/>
+      <Input
+          id="fullNameInput"
+          placeholder="{i18n>l_enterfullname}"
+          required="true"
+          value="{signUpModel>/signup/full_name}"
+          valueState="{= ${signUpModel>/signup/full_nameError} ? 'Error' : 'None'}"
+          valueStateText="{signUpModel>/signup/full_nameErrorText}"
+          liveChange=".onFullNameLiveChange" />
+
+      <!-- Email -->
+      <Label text="{i18n>l_email}" labelFor="emailInput" class="sapUiSmallMarginTop"
+          visible="{signUpModel>/signup/showEmail}" />
+      <Input
+          id="emailInput"
+          type="Email"
+          placeholder="{i18n>l_enteremail}"
+          required="true"
+          value="{signUpModel>/signup/email}"
+          valueState="{= ${signUpModel>/signup/emailError} ? 'Error' : 'None'}"
+          valueStateText="{signUpModel>/signup/emailErrorText}"
+          liveChange=".onEmailLiveChange"
+          visible="{signUpModel>/signup/showEmail}" />
+
+      <!-- Phone Number -->
+      <Label text="{i18n>l_Pno}" labelFor="phoneInput" class="sapUiSmallMarginTop"
+          visible="{signUpModel>/signup/showPhone}" />
+      <Input
+          id="phoneInput"
+          placeholder="{i18n>l_EPno}"
+          required="true"
+          value="{signUpModel>/signup/phone_number}"
+          valueState="{= ${signUpModel>/signup/phoneError} ? 'Error' : 'None'}"
+          valueStateText="{signUpModel>/signup/phoneErrorText}"
+          liveChange=".onPhoneLiveChange"
+          visible="{signUpModel>/signup/showPhone}" />
+
+      <!-- Password -->
+      <Label text="{i18n>l_password}" labelFor="passwordInput" class="sapUiSmallMarginTop"
+          visible="{signUpModel>/signup/showPassword}" />
+      <Input
+          id="passwordInput"
+          type="Password"
+          placeholder="{i18n>l_EPassword}"
+          required="true"
+          value="{signUpModel>/signup/password_pwd}"
+          valueState="{= ${signUpModel>/signup/passwordError} ? 'Error' : 'None'}"
+          valueStateText="{signUpModel>/signup/passwordErrorText}"
+          liveChange=".onPasswordLiveChange"
+          visible="{signUpModel>/signup/showPassword}" />
+
+      <!-- Confirm Password -->
+      <Label text="{i18n>l_CPassword}" labelFor="confirmPasswordInput" class="sapUiSmallMarginTop"
+          visible="{signUpModel>/signup/showConfirmPassword}" />
+      <Input
+          id="confirmPasswordInput"
+          type="Password"
+          placeholder="{i18n>l_CEPassword}"
+          required="true"
+          value="{signUpModel>/signup/confirm_password}"
+          valueState="{= ${signUpModel>/signup/confirmPasswordError} ? 'Error' : 'None'}"
+          valueStateText="{signUpModel>/signup/confirmPasswordErrorText}"
+          liveChange=".onConfirmPasswordLiveChange"
+          visible="{signUpModel>/signup/showConfirmPassword}" />
+                <!-- Role -->
+                <!-- <Label text="Role" labelFor="roleInput" class="sapUiSmallMarginTop"/>
+                <Select id="roleInput" selectedKey="{signUpModel>/signup/role_user}" required="true">
+                    <items>
+                        <core:Item key="User" text="User" />
+                        <core:Item key="Admin" text="Admin" />
+                    </items>
+                </Select> -->
+
+                <!-- Sign Up Button -->
+              <Button text="Sign Up" type="Emphasized" class="sapUiMediumMarginTop" press=".onSignUp" width="100%" />
+
+                <HBox justifyContent="Center" class="sapUiSmallMarginTop">
+                    <Text text="Already have an account?" />
+                    <Link text="Sign In" class="sapUiTinyMarginBegin" press=".onSignIn" />
+                </HBox>
+            </VBox>
+        </Panel>
+  </FlexBox>
+</mvc:View>

@@ -63,7 +63,7 @@ sap.ui.define([
           oData.passwordError = true;
           oData.passwordErrorText = "Password is required.";
           isValid = false;
-        } else if (oData.password.length < 6) {
+        } else if (oData.password.length < 3) {
           oData.passwordError = true;
           oData.passwordErrorText = "Password must be at least 6 characters.";
           isValid = false;

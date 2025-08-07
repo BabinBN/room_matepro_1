@@ -87,6 +87,11 @@
             "Dashboard"
           ]
         },
+         {
+    "name": "signup",
+    "pattern": "signup",
+    "target": ["SignUp"]
+  },
         {
           "name": "dashboardTiles",
           "pattern": "dashboardtiles",
@@ -101,6 +106,11 @@
         "viewId": "Login",
         "viewLevel": 1
       },
+      "SignUp": {
+    "viewName": "sign_up",
+    "viewId": "SignUp",
+    "viewLevel": 1
+  },
       
       "Dashboard": {
         "viewName": "dashboard",

@@ -29,37 +29,17 @@
           
           <!-- Side Navigation -->
          
-            <tnt:SideNavigation id="sideNavigation" selectedKey="walked" expanded="false">
-              <tnt:NavigationList>
-                <tnt:NavigationListItem text="Home" icon="sap-icon://home" />
-                <tnt:NavigationListGroup text="New">
-                  <tnt:NavigationListItem text="People" icon="sap-icon://people-connected" />
-                  <tnt:NavigationListItem text="Building" icon="sap-icon://building">
-                    <tnt:NavigationListItem text="Office 01" />
-                    <tnt:NavigationListItem text="Office 02" />
-                  </tnt:NavigationListItem>
-                  <tnt:NavigationListItem text="Mileage" icon="sap-icon://mileage">
-                    <tnt:NavigationListItem text="Driven" />
-                    <tnt:NavigationListItem text="Walked" id="walked" />
-                  </tnt:NavigationListItem>
-                </tnt:NavigationListGroup>
-                <tnt:NavigationListGroup text="Recently used">
-                  <tnt:NavigationListItem text="Managing My Area" icon="sap-icon://kpi-managing-my-area" />
-                  <tnt:NavigationListItem text="Flight" icon="sap-icon://flight" />
-                  <tnt:NavigationListItem text="Map" icon="sap-icon://map-2" />
-                </tnt:NavigationListGroup>
-                <tnt:NavigationListGroup text="Restricted" enabled="false">
-                  <tnt:NavigationListItem text="Running" icon="sap-icon://physical-activity" />
-                  <tnt:NavigationListItem text="Scissors" icon="sap-icon://scissors" />
-                </tnt:NavigationListGroup>
-                <tnt:NavigationListItem text="Transport" icon="sap-icon://passenger-train" />
-              </tnt:NavigationList>
-
+           <tnt:SideNavigation id="sideNavigation" selectedKey="walked" expanded="false" width="250px">
+        <tnt:NavigationList>
+          <tnt:NavigationListItem text="Home" icon="sap-icon://home" press="onHomePress" />
+  <tnt:NavigationListItem text="Vegetables" icon="sap-icon://nutrition-activity" press="onVegetablesCardPress" />
+  <tnt:NavigationListItem text="Groceries" icon="sap-icon://cart" press="onGroceriesCardPress" />
+  <tnt:NavigationListItem text="Room Members" icon="sap-icon://collaborate" press="onRoomMembersPress" />
+  <tnt:NavigationListItem text="Others" icon="sap-icon://thing-type" press="onOthersPress" />
+ </tnt:NavigationList>
               <tnt:fixedItem>
                 <tnt:NavigationList>
-                  <tnt:NavigationListItem text="Bar Chart" icon="sap-icon://bar-chart" />
-                  <tnt:NavigationListItem selectable="false" href="https://sap.com" target="_blank" text="External Link" icon="sap-icon://attachment" />
-                  <tnt:NavigationListItem text="Compare" icon="sap-icon://compare" />
+                  <tnt:NavigationListItem text="Settings" icon="sap-icon://action-settings" />
                 </tnt:NavigationList>
               </tnt:fixedItem>
             </tnt:SideNavigation>
