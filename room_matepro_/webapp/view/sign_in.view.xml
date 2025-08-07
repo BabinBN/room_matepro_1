@@ -44,7 +44,6 @@
                     <Text text="Don't have an account?" />
                     <Link text="Sign Up" class="sapUiTinyMarginBegin" press=".onSignUp"/>
                 </HBox>
-                <VBox id="googleSignInContainer" class="sapUiSmallMargin"/>
    
             </VBox>
         </Panel>

@@ -1,8 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
-    "sap/ui/model/json/JSONModel"
-  ], function (Controller, MessageToast, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "roommatepro/utils/AppConstants",
+    "roommatepro/utils/BaseApi"
+  ], function (Controller, MessageToast, JSONModel,AppConstants,BaseApi) {
     "use strict";
   
     return Controller.extend("roommatepro.controller.sign_in", {
@@ -70,16 +72,9 @@ sap.ui.define([
         oFormModel.refresh(true); 
   
         if (isValid) {
-          this.getView().setBusy(true);
-        //  this.byId("email").setBusy(true);
-          setTimeout(() => {
-            MessageToast.show("Login Successful!");
-           // this.byId("email").setBusy(false);
-           this.getView().setBusy(false);
-  
+          this.fetchSignIn();
+
           
-            this.getOwnerComponent().getRouter().navTo("dashboard");
-          }, 2000);
         } else {
           MessageToast.show("Please fix the errors.");
         }
@@ -97,6 +92,34 @@ sap.ui.define([
       isValidEmail: function (sEmail) {
         var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(sEmail);
+      },
+      fetchSignIn:async function () {
+        try{
+          let request = {
+            email: this.getView().getModel("loginModel").getData().login.email,
+            password_pwd: this.getView().getModel("loginModel").getProperty("/login/password")
+          };
+            var URL=AppConstants.URL.endpoint+AppConstants.URL.Signin;
+            //let req=await BaseApi.restMethodpost(URL,request)
+            let response = await BaseApi.restMethodpost(URL, request);
+
+            if(response)
+              {
+                this.getView().setBusy(true);
+        //  this.byId("email").setBusy(true);
+          setTimeout(() => {
+           // MessageToast.show("Login Successful!");
+           // this.byId("email").setBusy(false);
+           this.getView().setBusy(false);
+          }, 2000);
+              MessageToast.show("Login Successful!");
+              this.getOwnerComponent().getRouter().navTo("dashboard");
+            }
+        }
+        catch(error)
+        {
+          console.error("Error in fetchSignIn: ", error);
+        }
       }
     });
   });
