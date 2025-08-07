@@ -17,7 +17,7 @@
                 </HBox>
                 
                 <HBox justifyContent="Center" class="sapUiMediumMarginBottom">
-                    <Title text="Sign in to your account" level="H5" />
+                    <Title text="{i18n>l_signacc}" level="H5" />
                 </HBox>
                 <Label text="{i18n>l_email}" labelFor="email"/>   
                         
@@ -34,15 +34,15 @@
                     />
 
                 <HBox  justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginTop">
-                    <CheckBox text="Keep me logged in" />
-                    <Link text="Forget password?" press=".onForgotPassword" />
+                    <CheckBox text="{i18n>l_loggedin}" />
+                    <Link text="{i18n>l_forgotpassword}" press=".onForgotPassword" />
                 </HBox>
 
-                <Button text="Login" type="Emphasized" class="sapUiMediumMarginTop" press=".onLogin" width="100%"/>
+                <Button text="{i18n>l_login}" type="Emphasized" class="sapUiMediumMarginTop" press=".onLogin" width="100%"/>
 
                 <HBox justifyContent="Center" class="sapUiSmallMarginTop">
-                    <Text text="Don't have an account?" />
-                    <Link text="Sign Up" class="sapUiTinyMarginBegin" press=".onSignUp"/>
+                    <Text text="{i18n>l_donthaveacc}" />
+                    <Link text="{i18n>l_signup}" class="sapUiTinyMarginBegin" press=".onSignUp"/>
                 </HBox>
    
             </VBox>
