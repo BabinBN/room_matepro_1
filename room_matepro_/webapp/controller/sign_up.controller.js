@@ -15,6 +15,7 @@ sap.ui.define([
           email: "",
           phone_number: "",
           password_pwd: "",
+          role_user:"user",
           confirm_password: "",
 
           full_nameError: false,
@@ -144,15 +145,12 @@ sap.ui.define([
         return;
       }
   this.fetchSignUp();
-      // All validations passed
-      //MessageToast.show("Sign Up Successful!");
-      // Here you can send data to backend if needed
     },
     fetchSignUp: async function () {
   try {
-    let signupData = this.getView().getModel("signUpModel").getProperty("/signup");
+    let signupData = this.getView().getModel("signUpModel").getData().signup;
+      // let signupData = this.getView().getModel("signUpModel").getProperty("/signup");
 
-    // Validate all fields
     if (
       !signupData.full_name ||
       !signupData.email ||
@@ -175,12 +173,12 @@ sap.ui.define([
       full_name: signupData.full_name,
       email: signupData.email,
       phone_number: signupData.phone_number,
-      password_pwd: signupData.password_pwd
+      password_pwd: signupData.password_pwd,
+       role_user:signupData.role_user
     };
 
     let URL = AppConstants.URL.endpoint + AppConstants.URL.Signup;
 
-    this.getView().setBusy(true);
 
     let response = await BaseApi.restMethodpost(URL, request);
 
@@ -188,8 +186,12 @@ sap.ui.define([
 
     if (response) {
       MessageToast.show("Signup Successful!");
-      // Redirect to login after signup
-      this.getOwnerComponent().getRouter().navTo("signIn");
+      setTimeout(() => {
+           // MessageToast.show("Login Successful!");
+           // this.byId("email").setBusy(false);
+           this.getView().setBusy(false);
+          }, 2000);
+      this.getOwnerComponent().getRouter().navTo("login");
     }
   } catch (error) {
     this.getView().setBusy(false);
