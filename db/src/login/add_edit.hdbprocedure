@@ -9,6 +9,7 @@ BEGIN
     DECLARE it_role_user NVARCHAR(20);
     DECLARE it_created_at TIMESTAMP;
     DECLARE it_updated_at TIMESTAMP;
+    DECLARE it_confirm_pwd NVARCHAR(20);
 
     DECLARE i INTEGER;
 
@@ -32,7 +33,8 @@ BEGIN
                 "password_pwd" NVARCHAR(20) PATH '$.password_pwd',
                 "role_user" NVARCHAR(20) PATH '$.role_user',
                 "created_at" TIMESTAMP PATH '$.created_at',
-                "updated_at" TIMESTAMP PATH '$.updated_at'
+                "updated_at" TIMESTAMP PATH '$.updated_at',
+                "confirm_pwd" NVARCHAR(15) PATH '$.confirm_pwd'
             )
         ) AS JT;
 
@@ -45,7 +47,7 @@ BEGIN
         it_role_user := :temp_users."role_user"[:i];
         it_created_at := :temp_users."created_at"[:i];
         it_updated_at := :temp_users."updated_at"[:i];
-
+        it_confirm_pwd:=:temp_users."confirm_pwd"[:i];
         IF it_user_id > 0 THEN
             -- Update existing user
             UPDATE "userdt"
@@ -55,7 +57,8 @@ BEGIN
                 "phone_number" = it_phone_number,
                 "password_pwd" = it_password_pwd,
                 "role_user" = it_role_user,
-                "updated_at" = CURRENT_TIMESTAMP
+                "updated_at" = CURRENT_TIMESTAMP,
+                "confirm_pwd"=it_confirm_pwd
             WHERE
                 "user_id" = :it_user_id;
         ELSE
@@ -72,7 +75,8 @@ BEGIN
                     "password_pwd",
                     "role_user",
                     "created_at",
-                    "updated_at"
+                    "updated_at",
+                    "confirm_pwd"
                 ) VALUES (
                     it_full_name,
                     it_email,
@@ -80,7 +84,8 @@ BEGIN
                     it_password_pwd,
                     it_role_user,
                     CURRENT_TIMESTAMP,
-                    CURRENT_TIMESTAMP
+                    CURRENT_TIMESTAMP,
+                    it_confirm_pwd
                 );
 
                 it_user_id := CURRENT_IDENTITY_VALUE();
