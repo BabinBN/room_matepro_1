@@ -84,7 +84,7 @@
           type="Password"
           placeholder="{i18n>l_CEPassword}"
           required="true"
-          value="{signUpModel>/signup/confirm_password}"
+          value="{signUpModel>/signup/confirm_pwd}"
           valueState="{= ${signUpModel>/signup/confirmPasswordError} ? 'Error' : 'None'}"
           valueStateText="{signUpModel>/signup/confirmPasswordErrorText}"
           liveChange=".onConfirmPasswordLiveChange"

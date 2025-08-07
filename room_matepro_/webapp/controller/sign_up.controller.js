@@ -16,7 +16,7 @@ sap.ui.define([
           phone_number: "",
           password_pwd: "",
           role_user:"user",
-          confirm_password: "",
+          confirm_pwd: "",
 
           full_nameError: false,
           emailError: false,
