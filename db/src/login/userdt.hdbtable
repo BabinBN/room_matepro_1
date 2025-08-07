@@ -6,5 +6,6 @@ COLUMN TABLE  "userdt" (
     "password_pwd" NVARCHAR(20),
     "role_user" NVARCHAR(20),
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "confirm_pwd" NVARCHAR(15)
 );
