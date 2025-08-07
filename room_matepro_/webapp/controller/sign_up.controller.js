@@ -1,8 +1,10 @@
 sap.ui.define([
   "sap/ui/core/mvc/Controller",
   "sap/m/MessageToast",
-  "sap/m/MessageBox"
-], function (Controller, MessageToast, MessageBox) {
+  "sap/m/MessageBox",
+   "roommatepro/utils/AppConstants",
+    "roommatepro/utils/BaseApi"
+], function (Controller, MessageToast, MessageBox,AppConstants,BaseApi) {
   "use strict";
 
   return Controller.extend("roommatepro.controller.sign_up", {
@@ -85,6 +87,7 @@ sap.ui.define([
       var oModel = this.getView().getModel("signUpModel");
       var data = oModel.getProperty("/signup");
 
+
       // Reset errors
       data.full_nameError = false;
       data.emailError = false;
@@ -140,10 +143,60 @@ sap.ui.define([
         MessageBox.error("Please correct the highlighted fields.");
         return;
       }
-
+  this.fetchSignUp();
       // All validations passed
-      MessageToast.show("Sign Up Successful!");
+      //MessageToast.show("Sign Up Successful!");
       // Here you can send data to backend if needed
+    },
+    fetchSignUp: async function () {
+  try {
+    let signupData = this.getView().getModel("signUpModel").getProperty("/signup");
+
+    // Validate all fields
+    if (
+      !signupData.full_name ||
+      !signupData.email ||
+      !signupData.phone_number ||
+      !signupData.password_pwd ||
+      !signupData.confirm_password
+    ) {
+      MessageToast.show("Please fill in all the fields");
+      return;
     }
+
+    // Check password match
+    if (signupData.password_pwd !== signupData.confirm_password) {
+      MessageToast.show("Passwords do not match");
+      return;
+    }
+
+    // Prepare request payload
+    let request = {
+      full_name: signupData.full_name,
+      email: signupData.email,
+      phone_number: signupData.phone_number,
+      password_pwd: signupData.password_pwd
+    };
+
+    let URL = AppConstants.URL.endpoint + AppConstants.URL.Signup;
+
+    this.getView().setBusy(true);
+
+    let response = await BaseApi.restMethodpost(URL, request);
+
+    this.getView().setBusy(false);
+
+    if (response) {
+      MessageToast.show("Signup Successful!");
+      // Redirect to login after signup
+      this.getOwnerComponent().getRouter().navTo("signIn");
+    }
+  } catch (error) {
+    this.getView().setBusy(false);
+    console.error("Error in fetchSignUp: ", error);
+    MessageToast.show("Something went wrong during signup.");
+  }
+}
+
   });
 });
