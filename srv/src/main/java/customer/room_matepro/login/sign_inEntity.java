@@ -24,7 +24,7 @@ public class sign_inEntity {
     private String confirm_pwd;
 
     // // Constructor required for @ConstructorResult
-    public sign_inEntity(Long userId, String fullname, String email, String phonenumber, String passwordPwd, String roleUser,String createdAt, String updatedAt, String confirmPwd) {
+    public sign_inEntity(Long userId, String fullname, String email, String phonenumber, String passwordPwd, String roleUser,String createdAt, String updatedAt, String confirm_Pwd) {
         this.user_id = userId;
         this.full_name = fullname;
         this.email = email;
@@ -33,6 +33,6 @@ public class sign_inEntity {
         this.role_user = roleUser;
         this.created_at = createdAt; 
         this.updated_at = updatedAt; 
-        this.confirm_pwd = confirmPwd;
+        this.confirm_pwd = confirm_Pwd;
     }
 }
