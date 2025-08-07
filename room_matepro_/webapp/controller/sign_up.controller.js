@@ -174,7 +174,8 @@ sap.ui.define([
       email: signupData.email,
       phone_number: signupData.phone_number,
       password_pwd: signupData.password_pwd,
-       role_user:signupData.role_user
+       role_user:signupData.role_user,
+       confirm_pwd: signupData.confirm_pwd
     };
 
     let URL = AppConstants.URL.endpoint + AppConstants.URL.Signup;
