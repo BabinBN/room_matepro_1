@@ -45,107 +45,151 @@ sap.ui.define([
       oRouter.navTo("login");
     },
 
-    onFullNameLiveChange: function (oEvent) {
-      var value = oEvent.getParameter("value");
-      var oModel = this.getView().getModel("signUpModel");
+   onFullNameLiveChange: function (oEvent) {
+    var value = oEvent.getParameter("value");
+    var oModel = this.getView().getModel("signUpModel");
 
-      oModel.setProperty("/signup/full_name", value);
-      oModel.setProperty("/signup/showEmail", value.trim().length >= 5);
-    },
+    oModel.setProperty("/signup/full_name", value);
+    var isValid = value.trim().length >= 5;
 
-    onEmailLiveChange: function (oEvent) {
-      var value = oEvent.getParameter("value");
-      var oModel = this.getView().getModel("signUpModel");
+    oModel.setProperty("/signup/showEmail", isValid);
+    oModel.setProperty("/signup/full_nameError", !isValid);
+    oModel.setProperty("/signup/full_nameErrorText", isValid ? "" : "Enter your full name");
+},
 
-      oModel.setProperty("/signup/email", value);
-      oModel.setProperty("/signup/showPhone", value.includes("@") && value.includes("."));
-    },
+onEmailLiveChange: function (oEvent) {
+    var value = oEvent.getParameter("value");
+    var oModel = this.getView().getModel("signUpModel");
 
-    onPhoneLiveChange: function (oEvent) {
-      var value = oEvent.getParameter("value");
-      var oModel = this.getView().getModel("signUpModel");
+    oModel.setProperty("/signup/email", value);
 
-      oModel.setProperty("/signup/phone_number", value);
-      oModel.setProperty("/signup/showPassword", value.length >= 10);
-    },
+    // Only valid if email ends with ".com"
+    var emailPattern = /^[^\s@]+@[^\s@]+\.com$/i;
+    var isValid = emailPattern.test(value);
 
-    onPasswordLiveChange: function (oEvent) {
-      var value = oEvent.getParameter("value");
-      var oModel = this.getView().getModel("signUpModel");
+    oModel.setProperty("/signup/showPhone", isValid);
+    oModel.setProperty("/signup/emailError", !isValid);
+    oModel.setProperty("/signup/emailErrorText", isValid ? "" : "Enter a valid .com email");
+},
 
-      oModel.setProperty("/signup/password_pwd", value);
-      oModel.setProperty("/signup/showConfirmPassword", value.length >= 6);
-    },
+onPhoneLiveChange: function (oEvent) {
+    var value = oEvent.getParameter("value");
+    var oModel = this.getView().getModel("signUpModel");
 
-    onConfirmPasswordLiveChange: function (oEvent) {
-      var value = oEvent.getParameter("value");
-      var oModel = this.getView().getModel("signUpModel");
+    oModel.setProperty("/signup/phone_number", value);
+    var isValid = /^\d{10,}$/.test(value); // at least 10 digits
 
-      oModel.setProperty("/signup/confirm_password", value);
-    },
+    oModel.setProperty("/signup/showPassword", isValid);
+    oModel.setProperty("/signup/phoneError", !isValid);
+    oModel.setProperty("/signup/phoneErrorText", isValid ? "" : "Enter your phone number");
+},
+
+onPasswordLiveChange: function (oEvent) {
+    var value = oEvent.getParameter("value");
+    var oModel = this.getView().getModel("signUpModel");
+
+    oModel.setProperty("/signup/password_pwd", value);
+    var isValid = value.length >= 6;
+
+    oModel.setProperty("/signup/showConfirmPassword", isValid);
+    oModel.setProperty("/signup/passwordError", !isValid);
+    oModel.setProperty("/signup/passwordErrorText", isValid ? "" : "Enter a password (min 6 chars)");
+},
+
+onConfirmPasswordLiveChange: function (oEvent) {
+    var value = oEvent.getParameter("value");
+    var oModel = this.getView().getModel("signUpModel");
+    var password = oModel.getProperty("/signup/password_pwd");
+
+    oModel.setProperty("/signup/confirm_password", value);
+    var isValid = value === password && value.length > 0;
+
+    oModel.setProperty("/signup/confirmPasswordError", !isValid);
+    oModel.setProperty("/signup/confirmPasswordErrorText", isValid ? "" : "Passwords do not match");
+},
+
 
     onSignUp: function () {
-      var oModel = this.getView().getModel("signUpModel");
-      var data = oModel.getProperty("/signup");
+    var oModel = this.getView().getModel("signUpModel");
+    var data = oModel.getProperty("/signup");
 
+   
+    data.full_nameError = false;
+    data.emailError = false;
+    data.phoneError = false;
+    data.passwordError = false;
+    data.confirmPasswordError = false;
 
-      // Reset errors
-      data.full_nameError = false;
-      data.emailError = false;
-      data.phoneError = false;
-      data.passwordError = false;
-      data.confirmPasswordError = false;
+    data.full_nameErrorText = "";
+    data.emailErrorText = "";
+    data.phoneErrorText = "";
+    data.passwordErrorText = "";
+    data.confirmPasswordErrorText = "";
 
-      data.full_nameErrorText = "";
-      data.emailErrorText = "";
-      data.phoneErrorText = "";
-      data.passwordErrorText = "";
-      data.confirmPasswordErrorText = "";
+    var bError = false;
 
-      var bError = false;
-
-      if (!data.full_name) {
+   
+    if (!data.full_name || data.full_name.trim().length < 5) {
         data.full_nameError = true;
-        data.full_nameErrorText = "Enter your full name";
+        data.full_nameErrorText = "Enter your full name (min 5 characters)";
         bError = true;
-      }
+    }
 
-      if (!data.email) {
+    
+    var emailPattern =  /^[^\s@]+@[^\s@]+\.com$/i;
+    if (!data.email || !emailPattern.test(data.email)) {
         data.emailError = true;
-        data.emailErrorText = "Enter a valid email";
+        data.emailErrorText = "Enter a valid email (.com, .in, .org, .net)";
         bError = true;
-      }
+    }
 
-      if (!data.phone_number) {
+ 
+    var phonePattern = /^\d{10,}$/;
+    if (!data.phone_number || !phonePattern.test(data.phone_number)) {
         data.phoneError = true;
-        data.phoneErrorText = "Enter your phone number";
+        data.phoneErrorText = "Enter a valid phone number (min 10 digits)";
         bError = true;
-      }
+    }
 
-      if (!data.password_pwd) {
+    
+    if (!data.password_pwd || data.password_pwd.length < 6) {
         data.passwordError = true;
-        data.passwordErrorText = "Enter a password";
+        data.passwordErrorText = "Enter a password (min 6 characters)";
         bError = true;
-      }
+    }
 
-      if (!data.confirm_password) {
+ 
+    if (!data.confirm_password) {
         data.confirmPasswordError = true;
         data.confirmPasswordErrorText = "Re-enter your password";
         bError = true;
-      } else if (data.confirm_password !== data.password_pwd) {
+    } else if (data.confirm_password !== data.password_pwd) {
         data.confirmPasswordError = true;
         data.confirmPasswordErrorText = "Passwords do not match";
         bError = true;
-      }
+    }
 
-      oModel.refresh(true);
+    oModel.refresh(true);
 
-      if (bError) {
-        MessageBox.error("Please correct the highlighted fields.");
+    if (bError) {
+        //MessageBox.error("Please correct the highlighted fields.");
+        oModel.refresh(true);
+         setTimeout(function () {
+        var oModel = this.getView().getModel("signUpModel");
+
+        // Reset all error flags
+        oModel.setProperty("/signup/full_nameError", false);
+        oModel.setProperty("/signup/emailError", false);
+        oModel.setProperty("/signup/phoneError", false);
+        oModel.setProperty("/signup/passwordError", false);
+
+    }.bind(this), 2000);
         return;
-      }
-  this.fetchSignUp();
-    },
+    }
+
+    this.fetchSignUp();
+}
+,
     fetchSignUp: async function () {
   try {
     let signupData = this.getView().getModel("signUpModel").getData().signup;
