@@ -186,13 +186,15 @@ sap.ui.define([
     this.getView().setBusy(false);
 
     if (response) {
-      MessageToast.show("Signup Successful!");
+     
       setTimeout(() => {
            // MessageToast.show("Login Successful!");
            // this.byId("email").setBusy(false);
+            MessageToast.show("Signup Successful!");
+                 this.getOwnerComponent().getRouter().navTo("login");
+
            this.getView().setBusy(false);
           }, 2000);
-      this.getOwnerComponent().getRouter().navTo("login");
     }
   } catch (error) {
     this.getView().setBusy(false);

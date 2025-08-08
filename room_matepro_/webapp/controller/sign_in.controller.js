@@ -110,10 +110,11 @@ sap.ui.define([
           setTimeout(() => {
            // MessageToast.show("Login Successful!");
            // this.byId("email").setBusy(false);
+            MessageToast.show("Login Successful!");
+              this.getOwnerComponent().getRouter().navTo("dashboard");
            this.getView().setBusy(false);
           }, 2000);
-              MessageToast.show("Login Successful!");
-              this.getOwnerComponent().getRouter().navTo("dashboard");
+             
             }
         }
         catch(error)
