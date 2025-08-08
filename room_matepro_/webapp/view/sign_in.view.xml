@@ -13,7 +13,7 @@
         <Panel class="shadow-lg sapUiLargeMarginTop">
             <VBox class="sapUiMediumMargin " id="load" width="300px">
                 <HBox justifyContent="Center" class="sapUiTinyMarginBottom">
-                   <Image src="images/logo.png" width="100px" height="80px" />
+                   <Image src="Images/logo.png" width="100px" height="80px" />
                 </HBox>
                 
                 <HBox justifyContent="Center" class="sapUiMediumMarginBottom">
