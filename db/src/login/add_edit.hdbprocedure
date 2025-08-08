@@ -16,11 +16,27 @@ BEGIN
   DECLARE EXIT HANDLER FOR insert_error 
   BEGIN EX_MESSAGE := 'Error: ' ||::SQL_ERROR_MESSAGE;
 END;
-temp_users =
-SELECT JT.*
+--temp_users =
+SELECT "user_id",
+  "full_name",
+  "email",
+  "phone_number",
+  "password_pwd",
+  "role_user",
+  "created_at",
+  "updated_at",
+  "confirm_pwd" INTO it_user_id,
+  it_full_name,
+  it_email,
+  it_phone_number,
+  it_password_pwd,
+  it_role_user,
+  it_created_at,
+  it_updated_at,
+  it_confirm_pwd
 FROM JSON_TABLE(
     TO_CLOB(:IN_PARAM),
-    '$[*]' COLUMNS(
+    '$' COLUMNS(
       "user_id" BIGINT PATH '$.user_id',
       "full_name" NVARCHAR(50) PATH '$.full_name',
       "email" NVARCHAR(50) PATH '$.email',
@@ -32,18 +48,18 @@ FROM JSON_TABLE(
       "confirm_pwd" NVARCHAR(15) PATH '$.confirm_pwd'
     )
   ) AS JT;
-FOR i IN 1..RECORD_COUNT(:temp_users) DO it_user_id := :temp_users. "user_id" [:i];
-it_full_name := :temp_users. "full_name" [:i];
-it_email := :temp_users. "email" [:i];
-it_phone_number := :temp_users. "phone_number" [:i];
-it_password_pwd := :temp_users. "password_pwd" [:i];
-it_role_user := :temp_users. "role_user" [:i];
-it_created_at := :temp_users. "created_at" [:i];
-it_updated_at := :temp_users. "updated_at" [:i];
-it_confirm_pwd := :temp_users. "confirm_pwd" [:i];
+-- FOR i IN 1..RECORD_COUNT(:temp_users) DO it_user_id := :temp_users. "user_id" [:i];
+-- it_full_name := :temp_users. "full_name" [:i];
+-- it_email := :temp_users. "email" [:i];
+-- it_phone_number := :temp_users. "phone_number" [:i];
+-- it_password_pwd := :temp_users. "password_pwd" [:i];
+-- it_role_user := :temp_users. "role_user" [:i];
+-- it_created_at := :temp_users. "created_at" [:i];
+-- it_updated_at := :temp_users. "updated_at" [:i];
+-- it_confirm_pwd := :temp_users. "confirm_pwd" [:i];
 IF it_user_id > 0 THEN 
 -- Update existing user
-UPDATE "userdt"
+UPDATE "userdts"
 SET "full_name" = it_full_name,
   "email" = it_email,
   "phone_number" = it_phone_number,
@@ -55,13 +71,13 @@ WHERE "user_id" = :it_user_id;
 ELSE 
 -- Check if email already exists
 SELECT COUNT(*) INTO user_exists
-FROM "userdt"
+FROM "userdts"
 WHERE "email" = it_email;
 IF user_exists > 0 THEN SIGNAL insert_error
-SET MESSAGE_TEXT = 'User 
+SET MESSAGE_TEXT = 'User
 with same email already exists';
 ELSE
-INSERT INTO "userdt" (
+INSERT INTO "userdts" (
     "full_name",
     "email",
     "phone_number",
@@ -84,7 +100,7 @@ VALUES (
 it_user_id := CURRENT_IDENTITY_VALUE();
 END IF;
 END IF;
-END FOR;
+--END FOR;
 -- Final output if needed
 SELECT 0 AS "status",
   "user_id",
@@ -94,7 +110,7 @@ SELECT 0 AS "status",
   "role_user",
   "created_at",
   "updated_at"
-FROM "userdt"
+FROM "userdts"
 WHERE "user_id" = :it_user_id;
 EX_MESSAGE := 'Success';
 END;

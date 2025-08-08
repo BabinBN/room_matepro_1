@@ -10,7 +10,7 @@ BEGIN
        )
     
     );
-    IF EXISTS (SELECT*FROM "userdt" WHERE "email"=:email_ AND "password_pwd"=:Password_ )THEN
+    IF EXISTS (SELECT*FROM "userdts" WHERE "email"=:email_ AND "password_pwd"=:Password_ )THEN
         EX_MESSAGE='Login Success';
         SELECT
         "user_id",
@@ -20,7 +20,7 @@ BEGIN
         "role_user",
         "created_at",
         "updated_at"
-    FROM "userdt" Where "email"=email_ AND "password_pwd"=Password_;
+    FROM "userdts" Where "email"=email_ AND "password_pwd"=Password_;
     ELSE
         EX_MESSAGE='Invalid Credentials';
     END IF;
